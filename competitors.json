@@ -1,20 +1,23 @@
 [
   {
-    "id": "therapy-journal",
-    "name": "Therapy Journal",
-    "siteUrl": "TODO",
-    "appStoreUrl": "TODO"
+    "id": "granola",
+    "name": "Granola",
+    "siteUrls": ["https://www.granola.ai/"],
+    "appStoreUrl": "https://apps.apple.com/us/app/granola-ai-meeting-notes/id6739429409"
   },
   {
-    "id": "reflection",
-    "name": "Reflection",
-    "siteUrl": "TODO",
-    "appStoreUrl": "TODO"
+    "id": "wispr",
+    "name": "Wispr Flow",
+    "siteUrls": ["https://wisprflow.ai/"],
+    "appStoreUrl": "https://apps.apple.com/us/app/wispr-flow-ai-voice-keyboard/id6497229487"
   },
   {
-    "id": "mindsera",
-    "name": "Mindsera",
-    "siteUrl": "TODO",
-    "appStoreUrl": "TODO"
+    "id": "zoom",
+    "name": "Zoom",
+    "siteUrls": [
+      "https://www.zoom.com/en/lp/my-notes",
+      "https://www.zoom.com/en/products/ai-assistant/features/ai-note-taking/"
+    ],
+    "appStoreUrl": "https://apps.apple.com/us/app/zoom-workplace/id546505307"
   }
 ]

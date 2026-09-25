@@ -3,7 +3,8 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { parseArgs } from "node:util";
 import { sessionCost } from "./lib/browserbase.js";
 import { changes, previousRun } from "./lib/diff.js";
-import type { Implementation, RunOptions, Site, SiteResult } from "./lib/types.js";
+import { robotsAllows } from "./lib/robots.js";
+import { urlsOf, type Implementation, type RunOptions, type Site, type SiteResult } from "./lib/types.js";
 
 // Usage: npm run radar -- --impl playwright [--sites a,b] [--proxies] [--no-captchas] [--verified] [--label note]
 const { values: args } = parseArgs({
@@ -30,7 +31,7 @@ async function main() {
 
   const all: Site[] = JSON.parse(await readFile("competitors.json", "utf8"));
   const wanted = args.sites?.split(",");
-  const sites = all.filter((s) => (wanted ? wanted.includes(s.id) : true) && !s.siteUrl.startsWith("TODO"));
+  const sites = all.filter((s) => (wanted ? wanted.includes(s.id) : true) && s.siteUrls.length > 0);
   if (!sites.length) throw new Error("No sites to run. Fill in URLs in competitors.json or check --sites.");
 
   const opts: RunOptions = {
@@ -45,6 +46,11 @@ async function main() {
   for (const site of sites) {
     const t0 = Date.now();
     let result: SiteResult;
+    const blocked = (await Promise.all(urlsOf(site).map(async (u) => ({ u, ...(await robotsAllows(u)) })))).filter((r) => !r.allowed);
+    if (blocked.length) {
+      console.log(`  - ${site.id.padEnd(18)} skipped: robots.txt ${blocked.map((b) => `${b.u} ${b.note}`).join("; ")}`);
+      continue;
+    }
     try {
       const { data, usage } = await impl.extract(site, opts);
       result = { siteId: site.id, ok: true, data, usage, wallMs: Date.now() - t0 };

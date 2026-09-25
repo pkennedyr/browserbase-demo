@@ -3,6 +3,7 @@
   "type": "module",
   "scripts": {
     "typecheck": "tsc --noEmit",
+    "snapshot": "tsx scripts/snapshot.ts",
     "radar": "tsx run.ts",
     "probe:verified": "tsx scripts/probe-verified.ts",
     "hello": "tsx examples/hello-stagehand.ts"

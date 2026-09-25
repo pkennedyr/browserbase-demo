@@ -10,12 +10,11 @@ import type { Competitor } from "../../schema.js";
 type Scraper = (page: Page, site: Site) => Promise<Partial<Competitor>>;
 
 // One hand-written scraper per competitor. Deliberately only three.
+// Written against the rendered HTML from `npm run snapshot`.
 const scrapers: Record<string, Scraper> = {
-  // "mindsera": async (page, site) => {
-  //   await page.goto(site.siteUrl + "/pricing", { waitUntil: "domcontentloaded" });
-  //   const plans = await page.locator("...").allInnerTexts();
-  //   ...
-  // },
+  // granola: async (page, site) => { ... },
+  // wispr: async (page, site) => { ... },
+  // zoom: async (page, site) => { ... },
 };
 
 const playwright: Implementation = {

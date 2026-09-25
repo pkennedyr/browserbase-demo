@@ -17,9 +17,17 @@ npm install
 npm run typecheck
 ```
 
+## Network
+
+The browsers run in Browserbase's cloud, so the machine running this code only needs to reach
+`*.browserbase.com` (the API plus the regional CDP connect host). The robots.txt check also goes
+through Browserbase Fetch. It never contacts the competitor sites directly.
+
 ## Run
 
 ```bash
+npm run snapshot                                   # Phase 1 step 1: save rendered HTML + screenshots
+npm run snapshot -- --proxies                      # same, through Browserbase proxies
 npm run radar -- --impl playwright                 # Phase 1
 npm run radar -- --impl playwright --proxies       # same, through Browserbase proxies
 npm run radar -- --impl stagehand --sites mindsera # Phase 2, one site
@@ -36,14 +44,15 @@ and the fields that changed since the previous run of the same implementation.
 ## Layout
 
 ```
-competitors.json      sites to track (id, name, siteUrl, appStoreUrl)
+competitors.json      sites to track (id, name, siteUrls, appStoreUrl)
 schema.ts             the Competitor schema all three implementations extract
 run.ts                shared runner: timing, errors, cost lookup, results, diff
 lib/                  Browserbase helpers, types, run-to-run diff
 impl/playwright/      Phase 1: hand-written selectors over CDP
 impl/stagehand/       Phase 2: extract() with the schema
 impl/agent/           Phase 4: dashboard Agent triggered through the API
-scripts/              one-off probes
+scripts/              snapshot and one-off probes
+snapshots/            rendered HTML per page (screenshots stay local)
 examples/             the original Stagehand hello-world
 ```
 

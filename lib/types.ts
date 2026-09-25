@@ -3,9 +3,11 @@ import type { Competitor } from "../schema.js";
 export interface Site {
   id: string;
   name: string;
-  siteUrl: string;
+  siteUrls: string[]; // marketing pages; some products spread the story across several
   appStoreUrl?: string;
 }
+
+export const urlsOf = (site: Site) => [...site.siteUrls, ...(site.appStoreUrl ? [site.appStoreUrl] : [])];
 
 export interface RunOptions {
   // Browserbase session toggles, so Phase 1 can compare on/off.

@@ -44,6 +44,12 @@ What I expected: To have to estimate tokens myself.
 Job it maps to: Cost, Evals
 Product idea it suggests: The per-call data exists; the missing piece may be a per-*run* dollar figure. Check whether the dashboard adds it up.
 
+**[Fri Sep 25] [Setup] [delight] — a locked-down machine only needs one allowlist entry**
+What happened: This build's cloud container blocks the open web. Because the browser runs in Browserbase's cloud, the code only needs `*.browserbase.com`: the API, the CDP connection, and Fetch for robots.txt. Granola, Wispr, Zoom and the App Store never need to be reachable from where the code runs.
+What I expected: To open up every target site.
+Job it maps to: Governance
+Product idea it suggests: That's an enterprise security selling point: agents in a sandboxed network reach the web through one audited, logged egress point. Pair it with `allowedDomains` (the session-level navigation allowlist in the API) and it becomes a governance story, not just an infrastructure detail.
+
 ---
 
 <!-- Template
