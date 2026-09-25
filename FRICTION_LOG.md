@@ -50,11 +50,11 @@ What I expected: To open up every target site.
 Job it maps to: Governance
 Product idea it suggests: That's an enterprise security selling point: agents in a sandboxed network reach the web through one audited, logged egress point. Pair it with `allowedDomains` (the session-level navigation allowlist in the API) and it becomes a governance story, not just an infrastructure detail.
 
-**[Fri Sep 25] [Phase 1] [friction] — the replay shows what the browser did, not which line of code did it**
-What happened: Watching the Granola replay from `npm run snapshot`, I saw page loads and a brief layout change, but nothing ties a moment in the replay back to the code. The script's calls that read the page (`page.content()`, `innerText()`) take time and leave no visible trace; the full-page screenshot shows up as an unexplained viewport change. I had to open `scripts/snapshot.ts` to work out what I was watching.
-What I expected: A timeline of the commands the script sent (goto, wait, content, screenshot) lined up with the video, the way a debugger lines up with source.
+**[Fri Sep 25] [Phase 1] [friction] — the replay's Events tab shows navigations, not the commands that read the page**
+What happened: The Events tab lists CDP commands with their request and response, so `Page.navigate {url}` maps directly to `page.goto()`. That's useful. But on Granola it was the only row. The script also took a full-page screenshot (`Page.captureScreenshot`) and read the HTML and text (`Runtime.evaluate`), and neither appears. The waiting (`waitUntil`, `networkidle`) is Playwright listening for events, so it can't appear as a row, yet it's most of the session time. I had to open `scripts/snapshot.ts` to work out what I was watching.
+What I expected: Every command the script sent, on the replay timeline, lined up with the video the way a debugger lines up with source.
 Job it maps to: Debugging
-Product idea it suggests: Put CDP commands on the replay timeline for any client, not just Stagehand. The dashboard already has a Stagehand tab; check in Phase 2 whether it shows each `extract()` with its instruction. If it does, raw Playwright users get the weaker debugger, and that's a reason to move up a layer.
+Product idea it suggests: Show all CDP commands (or at least a toggle for them) and mark long waits on the timeline. Check in Phase 2 whether the Stagehand tab shows each `extract()` with its instruction. If it does, raw Playwright users get the weaker debugger, and that's a reason to move up a layer.
 
 ---
 
