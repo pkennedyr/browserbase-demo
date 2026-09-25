@@ -1,14 +1,18 @@
 {
-  "name": "gift-finder",
+  "name": "lucca-competitive-radar",
   "type": "module",
   "scripts": {
-    "build": "tsc",
-    "start": "tsx index.ts"
+    "typecheck": "tsc --noEmit",
+    "radar": "tsx run.ts",
+    "probe:verified": "tsx scripts/probe-verified.ts",
+    "hello": "tsx examples/hello-stagehand.ts"
   },
   "dependencies": {
-    "@browserbasehq/stagehand": "4.0.0",
+    "@browserbasehq/sdk": "^2.21.0",
+    "@browserbasehq/stagehand": "^4.1.0",
     "dotenv": "^16.4.7",
-    "zod": "^4.4.3"
+    "playwright-core": "^1.63.0",
+    "zod": "4.4.3"
   },
   "devDependencies": {
     "tsx": "^4.19.2",
@@ -16,6 +20,5 @@
   },
   "engines": {
     "node": ">=22.18.0"
-  },
-  "packageManager": "pnpm@10.24.0"
+  }
 }

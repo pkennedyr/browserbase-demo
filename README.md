@@ -1,30 +1,50 @@
-# browserbase-demo
+# Lucca Competitive Radar
 
-A first Browserbase project: a [Stagehand](https://docs.stagehand.dev) V4 script that opens a
-real Chrome browser in Browserbase's cloud, loads a live product page, and extracts structured
-data (title, price, availability, description, and the product info table) with natural-language
-`extract` / `observe` calls instead of hand-written selectors.
+A learning build on Browserbase: the same competitor-tracking workflow implemented three ways
+(raw Playwright over CDP, Stagehand, and a hosted Browserbase Agent), with a shared runner so the
+results compare side by side. The findings go in `FRICTION_LOG.md` and `COMPARISON.md`.
 
-The target is a public, unprotected storefront (books.toscrape.com), so it runs on the Free plan
-with no proxies. LLM calls go through Browserbase's Model Gateway on the same API key.
+Public pages only, low volume, respect robots.txt and site terms. If a site blocks us, that's a
+data point, not something to work around.
 
 ## Setup
 
 Requires Node.js 22.18 or newer.
 
 ```bash
-cp .env.example .env   # then paste your BROWSERBASE_API_KEY into .env
+cp .env.example .env   # paste BROWSERBASE_API_KEY
 npm install
-npm start
+npm run typecheck
 ```
 
-The script prints a `https://www.browserbase.com/sessions/<id>` link when it starts. Open it to
-watch the browser live, and afterwards to see the replay, logs, and network activity.
+## Run
 
-## Notes
+```bash
+npm run radar -- --impl playwright                 # Phase 1
+npm run radar -- --impl playwright --proxies       # same, through Browserbase proxies
+npm run radar -- --impl stagehand --sites mindsera # Phase 2, one site
+npm run probe:verified                             # can this plan start a Verified browser?
+```
 
-- Only `BROWSERBASE_API_KEY` is needed. The key identifies the project, so no project id is set.
-- `Stagehand.create({ browser, cache: true })` enables Browserbase's server-side cache, so repeated
-  steps with stable inputs are cheaper on later runs.
-- The star rating extracts as empty because the site encodes it as a CSS class rather than visible
-  text, which the accessibility snapshot does not include. A follow-up could read that class name.
+Flags: `--impl playwright|stagehand|agent`, `--sites id,id`, `--proxies`, `--no-captchas`,
+`--verified`, `--label "note"`.
+
+Each run prints a replay link per session and writes `results/<timestamp>-<impl>.json` with
+wall-clock time, success or failure per site, session IDs, browser seconds, proxy bytes, tokens,
+and the fields that changed since the previous run of the same implementation.
+
+## Layout
+
+```
+competitors.json      sites to track (id, name, siteUrl, appStoreUrl)
+schema.ts             the Competitor schema all three implementations extract
+run.ts                shared runner: timing, errors, cost lookup, results, diff
+lib/                  Browserbase helpers, types, run-to-run diff
+impl/playwright/      Phase 1: hand-written selectors over CDP
+impl/stagehand/       Phase 2: extract() with the schema
+impl/agent/           Phase 4: dashboard Agent triggered through the API
+scripts/              one-off probes
+examples/             the original Stagehand hello-world
+```
+
+`claude.md` is the Stagehand v4 API guide for Claude Code sessions in this repo.
