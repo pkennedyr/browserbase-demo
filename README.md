@@ -30,7 +30,7 @@ npm run snapshot                                   # Phase 1 step 1: save render
 npm run snapshot -- --proxies                      # same, through Browserbase proxies
 npm run radar -- --impl playwright                 # Phase 1
 npm run radar -- --impl playwright --proxies       # same, through Browserbase proxies
-npm run radar -- --impl stagehand --sites mindsera # Phase 2, one site
+npm run radar -- --impl stagehand --sites granola  # Phase 2, one site
 npm run probe:verified                             # can this plan start a Verified browser?
 ```
 
