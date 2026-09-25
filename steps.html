@@ -1,0 +1,172 @@
+<title>Radar Build Steps</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --bg: #F2F4F6;
+    --surface: #FFFFFF;
+    --ink: #17212B;
+    --muted: #5B6875;
+    --line: #DCE1E6;
+    --accent: #0F6E78;
+    --accent-soft: #E1F0F1;
+    --done: #3F7D4E;
+    --you: #9A5B12;
+    --you-soft: #FBEEDC;
+    --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --cond: "IBM Plex Sans Condensed", "IBM Plex Sans", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #10161C; --surface: #18212A; --ink: #E4E9EE; --muted: #93A0AC; --line: #2A3540;
+      --accent: #4FBAC4; --accent-soft: #15333A; --done: #7CC08C; --you: #E3A860; --you-soft: #3A2A16;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #10161C; --surface: #18212A; --ink: #E4E9EE; --muted: #93A0AC; --line: #2A3540;
+    --accent: #4FBAC4; --accent-soft: #15333A; --done: #7CC08C; --you: #E3A860; --you-soft: #3A2A16;
+  }
+  body { background: var(--bg); color: var(--ink); font: 15px/1.55 var(--sans); padding-inline: 16px; padding-block: 32px 64px; }
+  .wrap { max-width: 760px; margin: 0 auto; display: grid; gap: 28px; }
+  h1, h2 { font-family: var(--cond); text-wrap: balance; margin: 0; }
+  h1 { font-size: 30px; font-weight: 600; letter-spacing: -0.01em; }
+  h2 { font-size: 19px; font-weight: 600; }
+  code { font-family: var(--mono); font-size: 0.88em; background: var(--accent-soft); padding: 1px 5px; border-radius: 4px; }
+  a { color: var(--accent); }
+  .eyebrow { font: 500 12px var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+  header { display: grid; gap: 10px; }
+  .meta { color: var(--muted); max-width: 62ch; margin: 0; }
+  .progress { display: grid; gap: 6px; }
+  .bar { height: 6px; background: var(--line); border-radius: 3px; overflow: hidden; }
+  .bar span { display: block; height: 100%; background: var(--done); }
+  .progress small { font: 12px var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+  .now { background: var(--surface); border: 1px solid var(--accent); border-radius: 10px; padding: 18px 20px; display: grid; gap: 10px; }
+  .now h2 { color: var(--accent); }
+  .now p { margin: 0; }
+  .now ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
+  nav { display: flex; flex-wrap: wrap; gap: 6px 14px; font: 13px var(--mono); }
+  nav a { text-decoration: none; }
+  nav a:hover { text-decoration: underline; }
+  section { display: grid; gap: 10px; }
+  .phase-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; border-bottom: 1px solid var(--line); padding-bottom: 6px; }
+  .phase-head .count { font: 12px var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+  .learn { margin: 0; color: var(--muted); font-size: 14px; }
+  ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+  li { display: grid; grid-template-columns: 22px 44px 1fr; gap: 8px; align-items: start; padding: 7px 10px; border-radius: 6px; }
+  li .num { font: 12px/1.9 var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+  li .mark { width: 16px; height: 16px; margin-top: 3px; border-radius: 4px; border: 1.5px solid var(--line); display: grid; place-items: center; }
+  li.done .mark { background: var(--done); border-color: var(--done); }
+  li.done .mark::after { content: ""; width: 7px; height: 4px; border: solid var(--surface); border-width: 0 0 2px 2px; transform: translateY(-1px) rotate(-45deg); }
+  li.done .text { color: var(--muted); }
+  li.current { background: var(--accent-soft); }
+  li.current .mark { border-color: var(--accent); background: var(--accent); }
+  li.current .mark::after { content: ""; border-left: 6px solid var(--surface); border-top: 4px solid transparent; border-bottom: 4px solid transparent; margin-left: 2px; }
+  .you { font: 500 11px var(--mono); letter-spacing: 0.04em; text-transform: uppercase; color: var(--you); background: var(--you-soft); padding: 1px 6px; border-radius: 4px; margin-right: 6px; white-space: nowrap; }
+  footer { color: var(--muted); font-size: 13px; }
+  @media (max-width: 480px) { li { grid-template-columns: 22px 36px 1fr; padding-inline: 6px; } h1 { font-size: 25px; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Lucca Competitive Radar · Browserbase learning build</div>
+    <h1>Build steps</h1>
+    <p class="meta">The build plan as a checklist. Claude updates it as each step finishes. Findings go in <code>FRICTION_LOG.md</code> and <code>COMPARISON.md</code>, not here.</p>
+    <div class="progress">
+      <div class="bar"><span id="bar"></span></div>
+      <small id="progress-label"></small>
+    </div>
+  </header>
+
+  <div class="now" id="now">
+    <div class="eyebrow">You are here · Step 1.2</div>
+    <h2>Open the replays and say what you notice</h2>
+    <p>Step 1.1 ran with no proxies: 7 pages, all HTTP 200, 74 seconds in total. Open one or two replays before Claude explains anything.</p>
+    <ul>
+      <li><a href="https://www.browserbase.com/sessions/df701372-da26-4c43-8b8f-f9db3f2d9738">Granola replay</a></li>
+      <li><a href="https://www.browserbase.com/sessions/7b91af5d-0ed3-4210-bec7-124b4579c844">Wispr Flow replay</a></li>
+      <li><a href="https://www.browserbase.com/sessions/4e25cbbd-9c99-48e6-ba78-6e4032be31f6">Zoom replay</a></li>
+    </ul>
+  </div>
+
+  <nav id="nav" aria-label="Phases"></nav>
+  <main id="phases" class="wrap"></main>
+
+  <footer>Source of truth: <code>STEPS.md</code> on branch <code>claude/cool-fermat-978qpp</code>. Last updated Fri Sep 25.</footer>
+</div>
+
+<script>
+// status: "done" | "current" | "todo"; you: true marks a step that's yours to do
+const PHASES = [
+  { id: "setup", title: "Setup", steps: [
+    { t: "Scaffold the project: shared runner, schema, three implementation folders, results", s: "done" },
+    { t: "Pick competitors: Granola, Wispr Flow, Zoom (marketing URLs, deliberately no pricing pages)", s: "done" },
+    { t: "Start <code>FRICTION_LOG.md</code> with setup entries", s: "done" },
+    { t: "Fill in the sign-up and upgrade entry at the top of the friction log (what made you pay, and when)", s: "todo", you: true },
+    { t: "Confirm <code>BROWSERBASE_API_KEY</code> works (the project ID isn't needed)", s: "done" },
+    { t: "Check the current docs against the scripts (session create, proxies, Verified): they match", s: "done" },
+  ]},
+  { id: "p1", title: "Phase 1: raw Playwright over CDP", learn: "How brittle selectors are, what getting blocked looks like, how good replay is for debugging.", steps: [
+    { n: "1.1", t: "<code>npm run snapshot</code>: rendered HTML and screenshots of every page, no proxies", s: "done" },
+    { n: "1.2", t: "Open the replays and say what you notice (before Claude explains)", s: "current", you: true },
+    { n: "1.3", t: "<code>npm run snapshot -- --proxies</code>: the same pages through Browserbase proxies", s: "todo" },
+    { n: "1.4", t: "Compare the two snapshots: blocks, load times, proxy bytes, what changed on the page", s: "todo" },
+    { n: "1.5", t: "<code>npm run probe:verified</code>: can the Developer plan start a Verified browser?", s: "todo" },
+    { n: "1.6", t: "Log friction entries from 1.1–1.5", s: "todo" },
+    { n: "1.7", t: "Write hand-coded selectors for the 3 competitors in <code>impl/playwright/</code> (time how long it takes)", s: "todo" },
+    { n: "1.8", t: "<code>npm run radar -- --impl playwright</code>: first extraction run; check its output against the real pages", s: "todo" },
+    { n: "1.9", t: "Same run with <code>--proxies</code>", s: "todo" },
+    { n: "1.10", t: "Open the replay on a failed or wrong run and debug from it", s: "todo" },
+    { n: "1.11", t: "Fill in the Playwright column in <code>COMPARISON.md</code>", s: "todo" },
+  ]},
+  { id: "p2", title: "Phase 2: Stagehand", learn: "Lines of code, accuracy, what caching does to speed and cost, when Fetch is enough.", steps: [
+    { n: "2.1", t: "Check the current Stagehand v4 docs; implement <code>extract()</code> with the schema in <code>impl/stagehand/</code>", s: "todo" },
+    { n: "2.2", t: "Run across all competitors; spot-check accuracy against the pages", s: "todo" },
+    { n: "2.3", t: "Gateway default model vs. a pinned model: accuracy and tokens", s: "todo" },
+    { n: "2.4", t: "Turn caching on and run three times: tokens and seconds per run", s: "todo" },
+    { n: "2.5", t: "Try Fetch on the marketing pages: which ones don't need a browser?", s: "todo" },
+    { n: "2.6", t: "See how each approach handles the missing pricing data", s: "todo" },
+    { n: "2.7", t: "Log friction entries; fill in the Stagehand column", s: "todo" },
+  ]},
+  { id: "p3", title: "Phase 3: logging in and staying logged in", learn: "Persistence, and what this would feel like across hundreds of vendor portals.", steps: [
+    { n: "3.1", t: "Provide the Lucca web app URL and a test account (kept out of code and logs)", s: "todo", you: true },
+    { n: "3.2", t: "Log in once and save a Context", s: "todo" },
+    { n: "3.3", t: "Reuse the Context in new sessions", s: "todo" },
+    { n: "3.4", t: "Test what happens when the login session expires", s: "todo" },
+    { n: "3.5", t: "Log friction entries", s: "todo" },
+  ]},
+  { id: "p4", title: "Phase 4: dashboard Agent", learn: "The no-code experience, trust in the output, how run limits and pricing feel. The Developer plan includes 15 Agent calls a month.", steps: [
+    { n: "4.1", t: "Create an Agent in the dashboard with a system prompt and the schema", s: "todo", you: true },
+    { n: "4.2", t: "Trigger it through the API against the 3 competitors (<code>impl/agent/</code>)", s: "todo" },
+    { n: "4.3", t: "Click Optimize, run again, compare", s: "todo" },
+    { n: "4.4", t: "Director vs. Agents vs. Stagehand: one product or three?", s: "todo" },
+    { n: "4.5", t: "Log friction entries; fill in the Agent column", s: "todo" },
+  ]},
+  { id: "p5", title: "Synthesis (Wed Sep 30)", steps: [
+    { n: "5.1", t: "Sort the friction log by job and count entries per job", s: "todo" },
+    { n: "5.2", t: "Check your hypotheses (unmet needs: Governance, Access, Cost predictability, Evals; well served: infrastructure, debugging, model choice)", s: "todo" },
+    { n: "5.3", t: "Draft 5 observations in Paul's style: a plain claim backed by a specific detail", s: "todo" },
+  ]},
+  { id: "p6", title: "Stretch (a week later)", steps: [
+    { n: "6.1", t: "Re-run all three implementations; record what broke and what healed itself", s: "todo" },
+  ]},
+];
+
+const all = PHASES.flatMap(p => p.steps);
+const done = all.filter(s => s.s === "done").length;
+document.getElementById("bar").style.width = `${Math.round((done / all.length) * 100)}%`;
+document.getElementById("progress-label").textContent = `${done} of ${all.length} steps done`;
+
+document.getElementById("nav").innerHTML = PHASES.map(p => `<a href="#${p.id}">${p.title.split(":")[0]}</a>`).join("");
+document.getElementById("phases").innerHTML = PHASES.map(p => {
+  const d = p.steps.filter(s => s.s === "done").length;
+  return `<section id="${p.id}">
+    <div class="phase-head"><h2>${p.title}</h2><span class="count">${d}/${p.steps.length}</span></div>
+    ${p.learn ? `<p class="learn">Learning: ${p.learn}</p>` : ""}
+    <ol>${p.steps.map(s => `<li class="${s.s}"><span class="mark" aria-label="${s.s}"></span><span class="num">${s.n ?? ""}</span><span class="text">${s.you ? '<span class="you">You</span>' : ""}${s.t}</span></li>`).join("")}</ol>
+  </section>`;
+}).join("");
+</script>

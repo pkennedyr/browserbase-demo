@@ -1,6 +1,7 @@
 # Steps: where we are
 
 The build plan as a checklist. Claude updates this file as we go.
+Rendered view: https://claude.ai/artifact/HR63EHy37HhAF6ptbVtg5S (built from `steps.html`).
 **▶ marks the current step.** Findings go in `FRICTION_LOG.md` and `COMPARISON.md`, not here.
 
 Legend: `[x]` done · `[ ]` to do · `▶` you are here
