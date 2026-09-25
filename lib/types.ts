@@ -35,6 +35,7 @@ export interface SiteResult {
   error?: string;
   wallMs: number;
   usage: Usage;
+  emptyFields?: string[]; // schema fields that came back empty or missing
   // Filled in by the runner from the Browserbase API once the session ends.
   sessions?: SessionCost[];
 }

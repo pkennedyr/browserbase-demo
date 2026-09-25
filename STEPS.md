@@ -26,11 +26,11 @@ Learning: how brittle selectors are, what getting blocked looks like, how good r
 - [x] **1.3** `npm run snapshot -- --proxies`: refused with 402, because proxies aren't on the Free plan (the account is on Free)
 - [ ] **1.4** Blocked until the account upgrades. Compare the two snapshots: blocks, load times, proxy bytes, what changed on the page
 - [x] **1.5** `npm run probe:verified`: refused with 403, "only available on the Enterprise plan"
-- [ ] **1.6** Log friction entries from 1.1–1.5
+- ▶ **1.6** Log friction entries from Phase 1 (Claude suggests, you approve)
 - [x] **1.7** Write hand-coded selectors and clicks for the 3 competitors in `impl/playwright/` (time how long it takes). Clicks: dismiss cookie banners, expand App Store "more" and ratings, open Zoom's feature tabs. No clicking through to pricing; that's saved for Stagehand in Phase 2.
 - [x] **1.8** `npm run radar -- --impl playwright`: first extraction run. 2 of 3 marked succeeded; Zoom failed on its pricing cards
 - [ ] **1.9** Same run with `--proxies`
-- ▶ **1.10** **You:** open the replay on a failed or wrong run and debug from it
+- [x] **1.10** Debug from the replay: one strict-mode failure (Zoom's hidden second price) and one wrong selector that cost 60s of waiting and dropped the ratings. After fixes: 3/3 in 68s
 - [ ] **1.11** Fill in the Playwright column in `COMPARISON.md`
 
 ## Phase 2: Stagehand

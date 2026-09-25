@@ -1,0 +1,238 @@
+{
+  "file": "2026-09-25T21-27-11-750Z-playwright.json",
+  "summary": {
+    "impl": "playwright",
+    "label": "after fixes",
+    "options": {
+      "proxies": false,
+      "solveCaptchas": true,
+      "verified": false
+    },
+    "startedAt": "2026-09-25T21:26:03.550Z",
+    "wallMs": 68202,
+    "succeeded": 3,
+    "total": 3,
+    "browserSeconds": 65,
+    "proxyBytes": 0,
+    "inputTokens": 0,
+    "outputTokens": 0,
+    "cachedInputTokens": 0,
+    "llmCalls": 0,
+    "cacheHits": 0,
+    "changedSincePreviousRun": {
+      "granola": [
+        "appStoreRating",
+        "reviewCount"
+      ],
+      "wispr": [
+        "privacyClaims",
+        "keyFeatures",
+        "appStoreRating",
+        "reviewCount"
+      ]
+    }
+  },
+  "results": [
+    {
+      "siteId": "granola",
+      "ok": true,
+      "data": {
+        "name": "Granola",
+        "appStoreRating": 5,
+        "reviewCount": 14000,
+        "pricing": [],
+        "freeTier": true,
+        "privacyClaims": [
+          "Private by default, ready to share Your notes are just for you. Search them, polish them, analyze them, then send them as you like.",
+          "App Store label: Data Linked to You"
+        ],
+        "keyFeatures": [
+          "Start your meeting prepared",
+          "Give your full attention",
+          "Post-meeting admin, done",
+          "Humans in the room, not bots",
+          "Works with all meeting apps",
+          "Private by default, ready to share",
+          "Made for in-person meetings too",
+          "Syncs with your calendar"
+        ]
+      },
+      "usage": {
+        "sessionIds": [
+          "012178fd-26ba-4f87-a0c3-a20c1f4cd08d"
+        ]
+      },
+      "wallMs": 17250,
+      "sessions": [
+        {
+          "id": "012178fd-26ba-4f87-a0c3-a20c1f4cd08d",
+          "replayUrl": "https://www.browserbase.com/sessions/012178fd-26ba-4f87-a0c3-a20c1f4cd08d",
+          "status": "COMPLETED",
+          "proxyBytes": 0,
+          "browserSeconds": 16
+        }
+      ],
+      "emptyFields": [
+        "pricing"
+      ]
+    },
+    {
+      "siteId": "wispr",
+      "ok": true,
+      "data": {
+        "name": "Wispr Flow",
+        "appStoreRating": 4.8,
+        "reviewCount": 16000,
+        "pricing": [
+          {
+            "plan": "Pro Monthly Plan",
+            "price": "$15.00",
+            "period": "month"
+          },
+          {
+            "plan": "Pro Annual Plan",
+            "price": "$143.99",
+            "period": "year"
+          },
+          {
+            "plan": "Monthly Student Plan",
+            "price": "$7.49",
+            "period": "month"
+          },
+          {
+            "plan": "Pro Weekly Plan",
+            "price": "$4.49",
+            "period": "week"
+          },
+          {
+            "plan": "Annual Student Plan",
+            "price": "$72.00",
+            "period": "year"
+          }
+        ],
+        "freeTier": true,
+        "privacyClaims": [
+          "Your voice stays yours. Your data is never sold. You choose whether data is used to help improve Flow. SOC 2 Type II, HIPAA and ISO 27001 certified. Learn more",
+          "We never sell your data.",
+          "You can manage data-sharing preferences in Settings > Data and Privacy.",
+          "See Data Controls for details.Flow is independently certified to the world's top security standards: SOC 2 Type II, ISO 27001, and HIPAA compliance.",
+          "For more information, visit our Privacy page.",
+          "App Store label: Data Used to Track You",
+          "App Store label: Data Linked to You"
+        ],
+        "keyFeatures": [
+          "Speak naturally",
+          "Flow edits as you speak",
+          "Use it anywhere"
+        ]
+      },
+      "usage": {
+        "sessionIds": [
+          "b1ae2882-4ed5-49f1-bb0b-54fea0f1f3a2"
+        ]
+      },
+      "wallMs": 19481,
+      "sessions": [
+        {
+          "id": "b1ae2882-4ed5-49f1-bb0b-54fea0f1f3a2",
+          "replayUrl": "https://www.browserbase.com/sessions/b1ae2882-4ed5-49f1-bb0b-54fea0f1f3a2",
+          "status": "COMPLETED",
+          "proxyBytes": 0,
+          "browserSeconds": 19
+        }
+      ],
+      "emptyFields": []
+    },
+    {
+      "siteId": "zoom",
+      "ok": true,
+      "data": {
+        "name": "Zoom",
+        "appStoreRating": 4.7,
+        "reviewCount": 3200000,
+        "pricing": [
+          {
+            "plan": "My Notes Basic",
+            "price": "Free",
+            "period": "month, billed annually"
+          },
+          {
+            "plan": "My Notes",
+            "price": "$8.33",
+            "period": "month, billed annually"
+          },
+          {
+            "plan": "ZoomMate Your AI teammate.",
+            "price": "$16.67",
+            "period": "month, billed annually"
+          },
+          {
+            "plan": "My Notes Basic",
+            "price": "Free",
+            "period": "month"
+          },
+          {
+            "plan": "My Notes",
+            "price": "$10",
+            "period": "month"
+          },
+          {
+            "plan": "ZoomMate Your AI teammate.",
+            "price": "$20",
+            "period": "month"
+          },
+          {
+            "plan": "Zoom Workplace Pro (Monthly)",
+            "price": "$16.99",
+            "period": "month"
+          },
+          {
+            "plan": "Zoom Workplace Pro (Annual)",
+            "price": "$159.99",
+            "period": "year"
+          },
+          {
+            "plan": "My Notes (Monthly)",
+            "price": "$10.00",
+            "period": "month"
+          },
+          {
+            "plan": "My Notes (Annual)",
+            "price": "$100.00",
+            "period": "year"
+          }
+        ],
+        "freeTier": true,
+        "privacyClaims": [
+          "App Store label: Data Linked to You"
+        ],
+        "keyFeatures": [
+          "Never forget to take notes",
+          "Open My Notes",
+          "Take or transcribe notes",
+          "Get your AI summary",
+          "Review and share",
+          "Automate your follow-ups",
+          "Consulting and freelance",
+          "Sales"
+        ]
+      },
+      "usage": {
+        "sessionIds": [
+          "30b61def-2376-4492-b252-3e0aabfcf997"
+        ]
+      },
+      "wallMs": 30745,
+      "sessions": [
+        {
+          "id": "30b61def-2376-4492-b252-3e0aabfcf997",
+          "replayUrl": "https://www.browserbase.com/sessions/30b61def-2376-4492-b252-3e0aabfcf997",
+          "status": "COMPLETED",
+          "proxyBytes": 0,
+          "browserSeconds": 30
+        }
+      ],
+      "emptyFields": []
+    }
+  ]
+}

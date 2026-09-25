@@ -61,8 +61,16 @@ async function main() {
     // Sessions are closed by now, so their duration and proxy bytes are final.
     result.sessions = await Promise.all(result.usage.sessionIds.map(sessionCost));
     results.push(result);
-    const mark = result.ok ? "✓" : "✗";
-    console.log(`  ${mark} ${site.id.padEnd(18)} ${(result.wallMs / 1000).toFixed(1)}s  ${result.error ?? ""}`);
+    // "Didn't throw" isn't "got the data": list the schema fields that came back empty.
+    if (result.data) {
+      const d = result.data as Record<string, unknown>;
+      result.emptyFields = ["pricing", "freeTier", "keyFeatures", "privacyClaims", "appStoreRating", "reviewCount"].filter(
+        (k) => d[k] === undefined || (Array.isArray(d[k]) && (d[k] as unknown[]).length === 0),
+      );
+    }
+    const mark = !result.ok ? "✗" : result.emptyFields?.length ? "◐" : "✓";
+    const empty = result.emptyFields?.length ? `empty: ${result.emptyFields.join(", ")}` : "";
+    console.log(`  ${mark} ${site.id.padEnd(18)} ${(result.wallMs / 1000).toFixed(1)}s  ${result.error ?? empty}`);
     for (const s of result.sessions) console.log(`      replay: ${s.replayUrl}`);
   }
 

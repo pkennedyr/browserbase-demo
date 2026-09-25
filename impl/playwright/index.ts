@@ -26,6 +26,12 @@ async function clickIfVisible(loc: Locator, timeout = 3_000): Promise<boolean> {
   }
 }
 
+// Read optional text without Playwright's auto-wait. innerText() on a locator that
+// matches nothing waits the full 30s default timeout before throwing.
+async function textIfPresent(loc: Locator): Promise<string> {
+  return (await loc.count()) ? clean(await loc.first().innerText()) : "";
+}
+
 async function open(page: Page, url: string) {
   await page.goto(url, { waitUntil: "domcontentloaded", timeout: 45_000 });
   await page.waitForLoadState("networkidle", { timeout: 10_000 }).catch(() => {});
@@ -46,10 +52,11 @@ async function appStore(page: Page, url: string): Promise<Partial<Competitor>> {
   // Click: expand the description. Nothing in the schema needs it; it's here to see a click in the replay.
   await clickIfVisible(page.getByRole("button", { name: "more", exact: true }));
 
-  // Ratings badge: <dt>"14K Ratings"</dt> <dd>"5.0"</dd>
-  const badge = page.locator("#informationRibbon .badge").filter({ hasText: /Ratings$/ });
-  const countText = await badge.locator(".badge-dt").innerText().catch(() => "");
-  const ratingText = await badge.locator(".badge-dd .text-container").innerText().catch(() => "");
+  // Ratings badge: <dt>"14K Ratings"</dt> <dd>"5.0"</dd>. The badge's whole text is "14K Ratings 5.0",
+  // so match "Ratings" anywhere, not at the end.
+  const badge = page.locator("#informationRibbon .badge").filter({ hasText: /\bRatings\b/ });
+  const countText = await textIfPresent(badge.locator(".badge-dt"));
+  const ratingText = await textIfPresent(badge.locator(".badge-dd .text-container"));
 
   // Click: open the collapsed "In-App Purchases: Yes" row. Its prices are the only pricing on these pages.
   const iapRow = page.locator("#information dt", { hasText: "In-App Purchases" }).locator("xpath=..");
@@ -112,13 +119,15 @@ const scrapers: Record<string, Scraper> = {
   wispr: async (page, site) => {
     await open(page, site.siteUrls[0]!);
 
-    const keyFeatures = await visibleTexts(page.locator("h3").filter({ hasNotText: /^(Questions|Answer)$/ }));
+    // The feature panels sit in a scroll-driven animation (GSAP "pin-spacer") and stay hidden
+    // until scrolled into view, so read them whether or not they're visible.
+    const keyFeatures = uniq(await page.locator("h3").filter({ hasNotText: /^(Questions|Answer)$/ }).allTextContents());
 
     // Click: open two FAQ items. Their answers are hidden until clicked.
     const faq = (q: RegExp) => page.locator("[faq-item]").filter({ has: page.locator("[faq-question]", { hasText: q }) });
     const answer = async (q: RegExp) => {
       await clickIfVisible(faq(q).locator("[faq-question]"));
-      return clean(await faq(q).locator("[faq-answer]").innerText().catch(() => ""));
+      return textIfPresent(faq(q).locator("[faq-answer]"));
     };
     const freeAnswer = await answer(/Is Flow free/i);
     const privacyAnswer = await answer(/private|secure|data/i);
@@ -127,7 +136,7 @@ const scrapers: Record<string, Scraper> = {
     const privacySection = page.locator("section, div[class*=section]").filter({
       has: page.locator("h2", { hasText: "Your voice stays yours" }),
     });
-    const sectionText = await privacySection.first().innerText().catch(() => "");
+    const sectionText = await textIfPresent(privacySection);
     const privacyClaims = uniq([...sectionText.split("\n"), ...privacyAnswer.split(/(?<=\.)\s+/)])
       .filter((s) => /data|privacy|SOC|HIPAA|ISO|sell|train|secure/i.test(s));
 
@@ -147,16 +156,17 @@ const scrapers: Record<string, Scraper> = {
     const keyFeatures = await visibleTexts(page.locator("h3").filter({ hasNotText: /^“/ })); // skip quoted testimonials
 
     // Pricing cards, read once for each billing period. Click: the Monthly/Annually switch.
+    // Each card holds both prices; the switch adds `hidden` to one of the two price blocks.
     const readCards = async (period: string) => {
       const out: Competitor["pricing"] = [];
       for (const card of await page.locator(".fdn-zdcm-pricing-card").filter({ visible: true }).all()) {
         const plan = clean(await card.locator(".fdn-zdcm-plan").innerText());
-        const price = clean(await card.locator(".fdn-zdcm-plan-price").innerText());
+        const price = await textIfPresent(card.locator(".fdn-zdcm-pricing-card-content-body:not(.hidden) .fdn-zdcm-plan-price"));
         if (plan) out.push({ plan, price, period });
       }
       return out;
     };
-    const annual = await readCards("year (billed annually)");
+    const annual = await readCards("month, billed annually"); // e.g. "$8.33 /user/month billed annually"
     let monthly: Competitor["pricing"] = [];
     if (await clickIfVisible(page.locator("label.zdcm-switch"))) {
       await page.waitForLoadState("networkidle", { timeout: 5_000 }).catch(() => {}); // prices reload from /api/price-card
