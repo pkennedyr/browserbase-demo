@@ -22,10 +22,10 @@ Legend: `[x]` done · `[ ]` to do · `▶` you are here
 Learning: how brittle selectors are, what getting blocked looks like, how good replay is for debugging.
 
 - [x] **1.1** `npm run snapshot`: rendered HTML and screenshots of every page, no proxies
-- ▶ **1.2** **You:** open the replays and say what you notice (before Claude explains)
-- [ ] **1.3** `npm run snapshot -- --proxies`: the same pages through Browserbase proxies
-- [ ] **1.4** Compare the two snapshots: blocks, load times, proxy bytes, what changed on the page
-- [ ] **1.5** `npm run probe:verified`: can the Developer plan start a Verified browser?
+- [x] **1.2** **You:** open the replays and say what you notice (before Claude explains)
+- [x] **1.3** `npm run snapshot -- --proxies`: refused with 402, because proxies aren't on the Free plan (the account is on Free)
+- ▶ **1.4** Blocked until the account upgrades. Compare the two snapshots: blocks, load times, proxy bytes, what changed on the page
+- [x] **1.5** `npm run probe:verified`: refused with 403, "only available on the Enterprise plan"
 - [ ] **1.6** Log friction entries from 1.1–1.5
 - [ ] **1.7** Write hand-coded selectors and clicks for the 3 competitors in `impl/playwright/` (time how long it takes). Clicks: dismiss cookie banners, expand App Store "more" and ratings, open Zoom's feature tabs. No clicking through to pricing; that's saved for Stagehand in Phase 2.
 - [ ] **1.8** `npm run radar -- --impl playwright`: first extraction run; check its output against the real pages

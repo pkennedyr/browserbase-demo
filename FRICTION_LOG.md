@@ -50,6 +50,12 @@ What I expected: To open up every target site.
 Job it maps to: Governance
 Product idea it suggests: That's an enterprise security selling point: agents in a sandboxed network reach the web through one audited, logged egress point. Pair it with `allowedDomains` (the session-level navigation allowlist in the API) and it becomes a governance story, not just an infrastructure detail.
 
+**[Fri Sep 25] [Phase 1] [friction] — the replay shows what the browser did, not which line of code did it**
+What happened: Watching the Granola replay from `npm run snapshot`, I saw page loads and a brief layout change, but nothing ties a moment in the replay back to the code. The script's calls that read the page (`page.content()`, `innerText()`) take time and leave no visible trace; the full-page screenshot shows up as an unexplained viewport change. I had to open `scripts/snapshot.ts` to work out what I was watching.
+What I expected: A timeline of the commands the script sent (goto, wait, content, screenshot) lined up with the video, the way a debugger lines up with source.
+Job it maps to: Debugging
+Product idea it suggests: Put CDP commands on the replay timeline for any client, not just Stagehand. The dashboard already has a Stagehand tab; check in Phase 2 whether it shows each `extract()` with its instruction. If it does, raw Playwright users get the weaker debugger, and that's a reason to move up a layer.
+
 ---
 
 <!-- Template
