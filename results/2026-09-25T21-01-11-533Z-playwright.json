@@ -1,0 +1,143 @@
+{
+  "file": "2026-09-25T21-01-11-533Z-playwright.json",
+  "summary": {
+    "impl": "playwright",
+    "options": {
+      "proxies": false,
+      "solveCaptchas": true,
+      "verified": false
+    },
+    "startedAt": "2026-09-25T20:58:15.203Z",
+    "wallMs": 176331,
+    "succeeded": 2,
+    "total": 3,
+    "browserSeconds": 173,
+    "proxyBytes": 0,
+    "inputTokens": 0,
+    "outputTokens": 0,
+    "cachedInputTokens": 0,
+    "llmCalls": 0,
+    "cacheHits": 0,
+    "changedSincePreviousRun": {}
+  },
+  "results": [
+    {
+      "siteId": "granola",
+      "ok": true,
+      "data": {
+        "name": "Granola",
+        "pricing": [],
+        "freeTier": true,
+        "privacyClaims": [
+          "Private by default, ready to share Your notes are just for you. Search them, polish them, analyze them, then send them as you like.",
+          "App Store label: Data Linked to You"
+        ],
+        "keyFeatures": [
+          "Start your meeting prepared",
+          "Give your full attention",
+          "Post-meeting admin, done",
+          "Humans in the room, not bots",
+          "Works with all meeting apps",
+          "Private by default, ready to share",
+          "Made for in-person meetings too",
+          "Syncs with your calendar"
+        ]
+      },
+      "usage": {
+        "sessionIds": [
+          "51c372a0-3f71-4f15-b44c-4e2831358432"
+        ]
+      },
+      "wallMs": 76508,
+      "sessions": [
+        {
+          "id": "51c372a0-3f71-4f15-b44c-4e2831358432",
+          "replayUrl": "https://www.browserbase.com/sessions/51c372a0-3f71-4f15-b44c-4e2831358432",
+          "status": "COMPLETED",
+          "proxyBytes": 0,
+          "browserSeconds": 76
+        }
+      ]
+    },
+    {
+      "siteId": "wispr",
+      "ok": true,
+      "data": {
+        "name": "Wispr Flow",
+        "pricing": [
+          {
+            "plan": "Pro Monthly Plan",
+            "price": "$15.00",
+            "period": "month"
+          },
+          {
+            "plan": "Pro Annual Plan",
+            "price": "$143.99",
+            "period": "year"
+          },
+          {
+            "plan": "Monthly Student Plan",
+            "price": "$7.49",
+            "period": "month"
+          },
+          {
+            "plan": "Pro Weekly Plan",
+            "price": "$4.49",
+            "period": "week"
+          },
+          {
+            "plan": "Annual Student Plan",
+            "price": "$72.00",
+            "period": "year"
+          }
+        ],
+        "freeTier": true,
+        "privacyClaims": [
+          "Your data is never sold. You choose whether data is used to help improve Flow. SOC 2 Type II, HIPAA and ISO 27001 certified.",
+          "We never sell your data.",
+          "You can manage data-sharing preferences in Settings > Data and Privacy.",
+          "See Data Controls for details.Flow is independently certified to the world's top security standards: SOC 2 Type II, ISO 27001, and HIPAA compliance.",
+          "For more information, visit our Privacy page.",
+          "App Store label: Data Used to Track You",
+          "App Store label: Data Linked to You"
+        ],
+        "keyFeatures": []
+      },
+      "usage": {
+        "sessionIds": [
+          "c3f32d54-8248-4185-8c46-bf9f9c864dfd"
+        ]
+      },
+      "wallMs": 79987,
+      "sessions": [
+        {
+          "id": "c3f32d54-8248-4185-8c46-bf9f9c864dfd",
+          "replayUrl": "https://www.browserbase.com/sessions/c3f32d54-8248-4185-8c46-bf9f9c864dfd",
+          "status": "COMPLETED",
+          "proxyBytes": 0,
+          "browserSeconds": 79
+        }
+      ]
+    },
+    {
+      "siteId": "zoom",
+      "ok": false,
+      "error": "locator.innerText: Error: strict mode violation: locator('.fdn-zdcm-pricing-card').visible().nth(1).locator('.fdn-zdcm-plan-price') resolved to 2 elements:\n    1) <span class=\"fdn-zdcm-plan-price\">…</span> aka locator('span').filter({ hasText: '$' }).first()\n    2) <span class=\"fdn-zdcm-plan-price\">…</span> aka locator('span').filter({ hasText: '$' }).nth(2)\n\n    at createStacklessError\n    at strictModeViolationError\n    at eval\n    at evaluate\n    at \nCall log:\n\u001b[2m  - waiting for locator('.fdn-zdcm-pricing-card').visible().nth(1).locator('.fdn-zdcm-plan-price')\u001b[22m\n",
+      "usage": {
+        "sessionIds": [
+          "8eac7633-b567-4eb3-9ffb-a35c8aea864c"
+        ]
+      },
+      "wallMs": 18906,
+      "sessions": [
+        {
+          "id": "8eac7633-b567-4eb3-9ffb-a35c8aea864c",
+          "replayUrl": "https://www.browserbase.com/sessions/8eac7633-b567-4eb3-9ffb-a35c8aea864c",
+          "status": "COMPLETED",
+          "proxyBytes": 0,
+          "browserSeconds": 18
+        }
+      ]
+    }
+  ]
+}

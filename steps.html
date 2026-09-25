@@ -82,12 +82,13 @@
   </header>
 
   <div class="now" id="now">
-    <div class="eyebrow">You are here · Step 1.4 (blocked)</div>
-    <h2>Proxies need a paid plan</h2>
-    <p>The account is on Free, so the proxy run was refused with a 402. The Verified probe was refused with a 403, "only available on the Enterprise plan".</p>
+    <div class="eyebrow">You are here · Step 1.10</div>
+    <h2>Debug the first extraction run</h2>
+    <p>The first Playwright run finished with 2 of 3 marked succeeded, in 176 seconds. Zoom failed on its pricing cards. Before Claude explains anything, look at the failed replay and at what the two "successes" returned.</p>
     <ul>
-      <li><strong>You:</strong> read the two error messages and say what you notice.</li>
-      <li><strong>You:</strong> decide whether to upgrade to Developer ($20) now, or skip ahead to 1.7 and come back to proxies later.</li>
+      <li><a href="https://www.browserbase.com/sessions/8eac7633-b567-4eb3-9ffb-a35c8aea864c">Zoom replay (failed)</a></li>
+      <li><a href="https://www.browserbase.com/sessions/51c372a0-3f71-4f15-b44c-4e2831358432">Granola replay</a> · <a href="https://www.browserbase.com/sessions/c3f32d54-8248-4185-8c46-bf9f9c864dfd">Wispr Flow replay</a></li>
+      <li>Results file: <code>results/2026-09-25T21-01-11-533Z-playwright.json</code></li>
     </ul>
   </div>
 
@@ -112,13 +113,13 @@ const PHASES = [
     { n: "1.1", t: "<code>npm run snapshot</code>: rendered HTML and screenshots of every page, no proxies", s: "done" },
     { n: "1.2", t: "Open the replays and say what you notice (before Claude explains)", s: "done", you: true },
     { n: "1.3", t: "<code>npm run snapshot -- --proxies</code>: refused with 402, because proxies aren't on the Free plan (the account is on Free)", s: "done" },
-    { n: "1.4", t: "Blocked until the account upgrades. Compare the two snapshots: blocks, load times, proxy bytes, what changed on the page", s: "current" },
+    { n: "1.4", t: "Blocked until the account upgrades. Compare the two snapshots: blocks, load times, proxy bytes, what changed on the page", s: "todo" },
     { n: "1.5", t: "<code>npm run probe:verified</code>: refused with 403, \"only available on the Enterprise plan\"", s: "done" },
     { n: "1.6", t: "Log friction entries from 1.1–1.5", s: "todo" },
-    { n: "1.7", t: "Write hand-coded selectors and clicks for the 3 competitors in <code>impl/playwright/</code> (time how long it takes). Clicks: dismiss cookie banners, expand App Store \"more\" and ratings, open Zoom's feature tabs. No clicking through to pricing; that's saved for Stagehand in Phase 2.", s: "todo" },
-    { n: "1.8", t: "<code>npm run radar -- --impl playwright</code>: first extraction run; check its output against the real pages", s: "todo" },
+    { n: "1.7", t: "Write hand-coded selectors and clicks for the 3 competitors in <code>impl/playwright/</code> (time how long it takes). Clicks: dismiss cookie banners, expand App Store \"more\" and ratings, open Zoom's feature tabs. No clicking through to pricing; that's saved for Stagehand in Phase 2.", s: "done" },
+    { n: "1.8", t: "<code>npm run radar -- --impl playwright</code>: first extraction run. 2 of 3 marked succeeded; Zoom failed on its pricing cards", s: "done" },
     { n: "1.9", t: "Same run with <code>--proxies</code>", s: "todo" },
-    { n: "1.10", t: "Open the replay on a failed or wrong run and debug from it", s: "todo" },
+    { n: "1.10", t: "Open the replay on a failed or wrong run and debug from it", s: "current", you: true },
     { n: "1.11", t: "Fill in the Playwright column in <code>COMPARISON.md</code>", s: "todo" },
   ]},
   { id: "p2", title: "Phase 2: Stagehand", learn: "Lines of code, accuracy, what caching does to speed and cost, when Fetch is enough.", steps: [
