@@ -27,7 +27,7 @@ Learning: how brittle selectors are, what getting blocked looks like, how good r
 - [ ] **1.4** Compare the two snapshots: blocks, load times, proxy bytes, what changed on the page
 - [ ] **1.5** `npm run probe:verified`: can the Developer plan start a Verified browser?
 - [ ] **1.6** Log friction entries from 1.1–1.5
-- [ ] **1.7** Write hand-coded selectors for the 3 competitors in `impl/playwright/` (time how long it takes)
+- [ ] **1.7** Write hand-coded selectors and clicks for the 3 competitors in `impl/playwright/` (time how long it takes). Clicks: dismiss cookie banners, expand App Store "more" and ratings, open Zoom's feature tabs. No clicking through to pricing; that's saved for Stagehand in Phase 2.
 - [ ] **1.8** `npm run radar -- --impl playwright`: first extraction run; check its output against the real pages
 - [ ] **1.9** Same run with `--proxies`
 - [ ] **1.10** Open the replay on a failed or wrong run and debug from it
