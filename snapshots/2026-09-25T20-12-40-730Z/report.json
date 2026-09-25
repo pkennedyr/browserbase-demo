@@ -1,0 +1,115 @@
+[
+  {
+    "site": "granola",
+    "pages": [
+      {
+        "url": "https://www.granola.ai/",
+        "finalUrl": "https://www.granola.ai/",
+        "status": 200,
+        "title": "Granola — The AI Notepad for back-to-back meetings",
+        "ms": 9285,
+        "htmlKb": 448,
+        "visibleChars": 6076,
+        "looksBlocked": false,
+        "robots": "allowed"
+      },
+      {
+        "url": "https://apps.apple.com/us/app/granola-ai-meeting-notes/id6739429409",
+        "finalUrl": "https://apps.apple.com/us/app/granola-ai-meeting-notes/id6739429409",
+        "status": 200,
+        "title": "‎Granola - AI Meeting Notes App - App Store",
+        "ms": 3160,
+        "htmlKb": 254,
+        "visibleChars": 9844,
+        "looksBlocked": false,
+        "robots": "allowed"
+      }
+    ],
+    "session": {
+      "id": "df701372-da26-4c43-8b8f-f9db3f2d9738",
+      "replayUrl": "https://www.browserbase.com/sessions/df701372-da26-4c43-8b8f-f9db3f2d9738",
+      "status": "COMPLETED",
+      "proxyBytes": 0,
+      "browserSeconds": 14
+    }
+  },
+  {
+    "site": "wispr",
+    "pages": [
+      {
+        "url": "https://wisprflow.ai/",
+        "finalUrl": "https://wisprflow.ai/",
+        "status": 200,
+        "title": "Wispr Flow | Voice to Text Dictation & AI Notetaker",
+        "ms": 17528,
+        "htmlKb": 563,
+        "visibleChars": 9738,
+        "looksBlocked": false,
+        "robots": "allowed"
+      },
+      {
+        "url": "https://apps.apple.com/us/app/wispr-flow-ai-voice-keyboard/id6497229487",
+        "finalUrl": "https://apps.apple.com/us/app/wispr-flow-ai-voice-keyboard/id6497229487",
+        "status": 200,
+        "title": "‎Wispr Flow: AI Voice Keyboard App - App Store",
+        "ms": 3024,
+        "htmlKb": 259,
+        "visibleChars": 11335,
+        "looksBlocked": false,
+        "robots": "allowed"
+      }
+    ],
+    "session": {
+      "id": "7b91af5d-0ed3-4210-bec7-124b4579c844",
+      "replayUrl": "https://www.browserbase.com/sessions/7b91af5d-0ed3-4210-bec7-124b4579c844",
+      "status": "COMPLETED",
+      "proxyBytes": 0,
+      "browserSeconds": 22
+    }
+  },
+  {
+    "site": "zoom",
+    "pages": [
+      {
+        "url": "https://www.zoom.com/en/lp/my-notes",
+        "finalUrl": "https://www.zoom.com/en/lp/my-notes",
+        "status": 200,
+        "title": "Zoom My Notes",
+        "ms": 15101,
+        "htmlKb": 389,
+        "visibleChars": 8380,
+        "looksBlocked": false,
+        "robots": "allowed"
+      },
+      {
+        "url": "https://www.zoom.com/en/products/ai-assistant/features/ai-note-taking/",
+        "finalUrl": "https://www.zoom.com/en/products/ai-assistant/features/ai-note-taking/",
+        "status": 200,
+        "title": "AI note taker: Your AI Meeting Assistant | Zoom",
+        "ms": 15243,
+        "htmlKb": 630,
+        "visibleChars": 13365,
+        "looksBlocked": false,
+        "robots": "allowed"
+      },
+      {
+        "url": "https://apps.apple.com/us/app/zoom-workplace/id546505307",
+        "finalUrl": "https://apps.apple.com/us/app/zoom-workplace/id546505307",
+        "status": 200,
+        "title": "‎Zoom Workplace App - App Store",
+        "ms": 3373,
+        "htmlKb": 304,
+        "visibleChars": 13651,
+        "looksBlocked": false,
+        "robots": "allowed"
+      }
+    ],
+    "session": {
+      "id": "4e25cbbd-9c99-48e6-ba78-6e4032be31f6",
+      "replayUrl": "https://www.browserbase.com/sessions/4e25cbbd-9c99-48e6-ba78-6e4032be31f6",
+      "status": "COMPLETED",
+      "proxyBytes": 0,
+      "browserSeconds": 36
+    }
+  }
+]
